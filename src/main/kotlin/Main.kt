@@ -15,4 +15,10 @@ fun main() {
 
     val json = response.body()
     println("olha eu aqui $json")
+
+    val meuJogo = Jogo()
+    meuJogo.titulo = "Batman: Asylum Game of the Year Edition"
+    meuJogo.capa = "https://upload.wikimedia.org/wikipedia/pt/4/45/Batman_Arkham_Asylum.jpg"
+
+    println(meuJogo)
 }
