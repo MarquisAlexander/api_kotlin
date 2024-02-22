@@ -18,16 +18,39 @@ fun main() {
     val client: HttpClient = HttpClient.newHttpClient();
     val request = HttpRequest.newBuilder().uri(URI.create(endereco)).build()
 
-    val response = client
-        .send(request, BodyHandlers.ofString())
+    val response = client.send(request, BodyHandlers.ofString())
 
     val json = response.body()
-    println("olha eu aqui $json")
 
     val gson = Gson()
-    val meuInfoJogo = gson.fromJson(json, infoJogo::class.java)
+    val meuInfoJogo = gson.fromJson(json, InfoJogo::class.java)
 
-    val meuJogo = Jogo(meuInfoJogo.info.title, meuInfoJogo.info.thumb)
+    var meuJogo: Jogo? = null
 
-    println(meuJogo)
+    val resultado = runCatching {
+        meuJogo = Jogo(meuInfoJogo.info.title, meuInfoJogo.info.thumb)
+    }
+
+    resultado.onFailure {
+        println("Jogo inexistente. Tente outro id")
+    }
+
+    resultado.onSuccess {
+        println("Deseja inserir uma descrição personalizada? S/N")
+        val opcao = leitura.nextLine()
+        if (opcao.equals("S", true)) {
+            println("Insiraa a descrição personalizada para o jogo:")
+            val descricaoPersonalizada = leitura.nextLine()
+            meuJogo?.descricao = descricaoPersonalizada
+        } else {
+            meuJogo?.descricao = meuJogo?.titulo
+        }
+
+        println(meuJogo)
+    }
+
+    resultado.onSuccess {
+        println("Busca finalizada com sucesso.")
+    }
+
 }
