@@ -1,11 +1,8 @@
-package org.example
+package org.example.br.com.pessoal.games.principal
 
-import com.google.gson.Gson
-import java.net.URI
-import java.net.http.HttpClient
-import java.net.http.HttpRequest
-import java.net.http.HttpResponse.BodyHandlers
-import java.util.Scanner
+import br.com.pessoal.games.servicos.ConsumoApi
+import org.example.br.com.pessoal.games.modelo.Jogo
+import java.util.*
 
 
 fun main() {
@@ -13,22 +10,14 @@ fun main() {
     println("Digite um código de jogo para buscar")
     val busca = leitura.nextLine()
 
-    val endereco = "https://www.cheapshark.com/api/1.0/games?id=$busca"
+    val buscaApi = ConsumoApi()
+    val informacaoJogo = buscaApi.buscaJogo(busca)
 
-    val client: HttpClient = HttpClient.newHttpClient();
-    val request = HttpRequest.newBuilder().uri(URI.create(endereco)).build()
-
-    val response = client.send(request, BodyHandlers.ofString())
-
-    val json = response.body()
-
-    val gson = Gson()
-    val meuInfoJogo = gson.fromJson(json, InfoJogo::class.java)
 
     var meuJogo: Jogo? = null
 
     val resultado = runCatching {
-        meuJogo = Jogo(meuInfoJogo.info.title, meuInfoJogo.info.thumb)
+        meuJogo = Jogo(informacaoJogo.info.title, informacaoJogo.info.thumb)
     }
 
     resultado.onFailure {
