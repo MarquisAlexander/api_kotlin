@@ -3,7 +3,7 @@ import br.com.pessoal.games.modelo.Gamer
 fun main() {
     val gamer1 = Gamer(
         "Alexander",
-        "teste@teste.com",
+        "marquissantos123@gmail",
         "28/08/2000",
         "thisIsMarquis"
     )
