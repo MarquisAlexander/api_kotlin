@@ -1,5 +1,6 @@
 package br.com.pessoal.games.modelo
 
+import org.example.br.com.pessoal.games.modelo.Jogo
 import kotlin.random.Random
 
 data class Gamer(var nome: String, var email: String) {
@@ -13,6 +14,8 @@ data class Gamer(var nome: String, var email: String) {
         }
     var idInterno: String? = null
         private set
+
+    val jogosBuscados = mutableListOf<Jogo>()
 
     constructor(nome: String, email: String, dataNascimento: String, usuario: String) : this(nome, email) {
         this.dataNascimento = dataNascimento
