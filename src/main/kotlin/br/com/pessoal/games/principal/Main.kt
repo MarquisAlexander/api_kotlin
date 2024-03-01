@@ -3,15 +3,16 @@ package org.example.br.com.pessoal.games.principal
 import br.com.pessoal.games.modelo.Gamer
 import br.com.pessoal.games.servicos.ConsumoApi
 import org.example.br.com.pessoal.games.modelo.Jogo
+import transformarEmIdade
 import java.util.*
 
 
 fun main() {
     val leitura = Scanner(System.`in`)
     val gamer = Gamer.criarGamer(leitura)
-
     println("Cadastro concluído com sucesso. Dados do gamer:")
     println(gamer)
+    println("Idade do gamer " + gamer.dataNascimento?.transformarEmIdade())
 
     do {
         println("Digite um código de jogo para buscar")
