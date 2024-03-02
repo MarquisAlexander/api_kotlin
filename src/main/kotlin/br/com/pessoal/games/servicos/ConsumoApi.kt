@@ -1,11 +1,14 @@
 package br.com.pessoal.games.servicos
 
+import br.com.alura.alugames.modelo.InfoJogoJson
 import br.com.pessoal.games.modelo.Gamer
 import br.com.pessoal.games.modelo.InfoGamerJson
 import br.com.pessoal.games.utilitario.criaGamer
+import br.com.pessoal.games.utilitario.criaJogo
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import org.example.br.com.pessoal.games.modelo.InfoJogo
+import org.example.br.com.pessoal.games.modelo.Jogo
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
@@ -44,5 +47,18 @@ class ConsumoApi {
         }
 
         return listaGamerConvertida
+    }
+
+    fun buscaJogosJson(): List<Jogo> {
+        val endereco = "https://raw.githubusercontent.com/jeniblodev/arquivosJson/main/jogos.json"
+        val json = consomeDados(endereco)
+
+        val gson = Gson()
+        val meuJogoTipo = object : TypeToken<List<InfoJogoJson>>() {}.type
+        val listaJogo: List<InfoJogoJson> = gson.fromJson(json, meuJogoTipo)
+
+        val listaJogoConvertida = listaJogo.map { infoJogoJson -> infoJogoJson.criaJogo() }
+
+        return listaJogoConvertida
     }
 }

@@ -5,8 +5,14 @@ import br.com.pessoal.games.servicos.ConsumoApi
 fun main() {
     val consumo = ConsumoApi()
     val listaGamers = consumo.buscaGamers()
-    val jogoApi = consumo.buscaJogo("151")
+    val listaJogoJson = consumo.buscaJogosJson()
 
-    println(jogoApi)
-    println(listaGamers)
+    val gamerCaroline = listaGamers.get(3)
+    val jogoResidentVillage = listaJogoJson.get(10)
+
+    println(gamerCaroline)
+    println(jogoResidentVillage)
+
+    val aluguel = gamerCaroline.alugaJogo(jogoResidentVillage)
+    println(aluguel)
 }
