@@ -1,6 +1,7 @@
 package br.com.pessoal.games.modelo
 
 import org.example.br.com.pessoal.games.modelo.Jogo
+import java.time.LocalDate
 import java.util.Scanner
 import kotlin.random.Random
 
@@ -17,6 +18,7 @@ data class Gamer(var nome: String, var email: String) {
         private set
 
     val jogosBuscados = mutableListOf<Jogo?>()
+    val jogosAlugados = mutableListOf<Aluguel>()
 
     constructor(nome: String, email: String, dataNascimento: String, usuario: String) : this(nome, email) {
         this.dataNascimento = dataNascimento
@@ -52,8 +54,16 @@ data class Gamer(var nome: String, var email: String) {
         }
     }
 
-    fun alugaJogo(jogo: Jogo): Aluguel {
-        return Aluguel(this, jogo)
+    fun alugaJogo(jogo: Jogo, periodo: Periodo): Aluguel {
+        val aluguel = Aluguel(this, jogo, periodo)
+        jogosAlugados.add(aluguel)
+
+        return aluguel
+    }
+
+    fun jogosDoMes(mes: Int): List<Jogo> {
+        return jogosAlugados.filter { aluguel -> aluguel.periodo.dataInicial.monthValue == mes }
+            .map { aluguel -> aluguel.jogo }
     }
 
     companion object {
