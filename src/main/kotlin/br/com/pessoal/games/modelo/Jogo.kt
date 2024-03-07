@@ -1,8 +1,9 @@
 package org.example.br.com.pessoal.games.modelo
 
 import br.com.pessoal.games.modelo.Recomendavel
+import com.google.gson.annotations.Expose
 
-data class Jogo(val titulo: String, val capa: String): Recomendavel {
+data class Jogo(@Expose val titulo: String, @Expose val capa: String) : Recomendavel {
     var descricao: String? = null
     var preco = 0.0
     private val listaNotas = mutableListOf<Int>()
@@ -27,7 +28,8 @@ data class Jogo(val titulo: String, val capa: String): Recomendavel {
         return "Jogo: \n" +
                 "Titulo: $titulo \n" +
                 "Capa: '$capa \n" +
-                "Descricao: $descricao" +
-                "Preço: $preco"
+                "Descricao: $descricao \n" +
+                "Preço: $preco \n" +
+                "Reputação: $media \n"
     }
 }
