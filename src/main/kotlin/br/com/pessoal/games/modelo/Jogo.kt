@@ -1,6 +1,7 @@
 package org.example.br.com.pessoal.games.modelo
 
 import br.com.pessoal.games.modelo.Recomendavel
+import br.com.pessoal.games.utilitario.formatoComDuasCasasDecimais
 import com.google.gson.annotations.Expose
 
 data class Jogo(@Expose val titulo: String, @Expose val capa: String) : Recomendavel {
@@ -9,7 +10,7 @@ data class Jogo(@Expose val titulo: String, @Expose val capa: String) : Recomend
     private val listaNotas = mutableListOf<Int>()
 
     override val media: Double
-        get() = listaNotas.average()
+        get() = listaNotas.average().formatoComDuasCasasDecimais()
 
     override fun recomendar(nota: Int) {
         if (nota < 1 || nota > 10) {
