@@ -3,6 +3,8 @@ package org.example.br.com.pessoal.games.modelo
 import br.com.pessoal.games.modelo.Recomendavel
 import br.com.pessoal.games.utilitario.formatoComDuasCasasDecimais
 import com.google.gson.annotations.Expose
+import javax.persistence.*
+
 
 data class Jogo(@Expose val titulo: String, @Expose val capa: String) : Recomendavel {
     var descricao: String? = null
