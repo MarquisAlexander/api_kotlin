@@ -14,6 +14,7 @@ data class Gamer(var nome: String, var email: String) : Recomendavel {
                 criarIdInterno()
             }
         }
+    var id = 0
     var idInterno: String? = null
         private set
     var plano: Plano = PlanoAvulso("BRONZE")
@@ -38,9 +39,13 @@ data class Gamer(var nome: String, var email: String) : Recomendavel {
         jogosRecomendados.add(jogo)
     }
 
-    constructor(nome: String, email: String, dataNascimento: String, usuario: String) : this(nome, email) {
+    constructor(nome: String, email: String, dataNascimento: String?, usuario: String?, id: Int = 0) : this(
+        nome,
+        email
+    ) {
         this.dataNascimento = dataNascimento
         this.usuario = usuario
+        this.id = id
         criarIdInterno()
     }
 
