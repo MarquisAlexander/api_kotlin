@@ -18,10 +18,15 @@ fun main() {
         "Um jogo de ação em mundo aberto, onde você pode assumir o papel de três protagonistas e explorar uma cidade cheia de possibilidades."
     )
     val manager = Banco.getEntityManager()
-    val jogoDao = JogosDAO(manager)
-    jogoDao.adicionarJogo(jogo2)
+    val jogoDAO = JogosDAO(manager)
+//    jogoDao.adicionar(jogo2)
 
-    val listaJogos: List<Jogo> = jogoDao.getJogos()
+    val jogoRecuperado = jogoDAO.recuperarPeloId(5)
+    println(jogoRecuperado)
+
+    jogoDAO.apagar(5)
+
+    val listaJogos: List<Jogo> = jogoDAO.getLista()
     println(listaJogos)
 
     manager.close()
